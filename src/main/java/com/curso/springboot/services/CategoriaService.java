@@ -2,7 +2,7 @@ package com.curso.springboot.services;
 
 import com.curso.springboot.domain.Categoria;
 import com.curso.springboot.repository.CategoriaRepository;
-import org.hibernate.ObjectNotFoundException;
+import com.curso.springboot.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +17,7 @@ public class CategoriaService {
     public Categoria find(Integer id){
         Optional<Categoria> obj = categoriaRepository.findById(id);
         //return obj.orElse(null);
-        return obj.orElseThrow(() -> new ObjectNotFoundException(Categoria.class,
-                "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
     }
 
 }
